@@ -22,11 +22,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.studylink.ui.theme.StudyLinkTheme
 
 @Composable
-fun LoginView(
-    navController : NavController = rememberNavController(),
+fun RegisterView(
+    navController: NavController = rememberNavController(),
     modifier: Modifier = Modifier
-){
-    val viewModel : LoginViewModel = viewModel()
+) {
+    val viewModel: RegisterViewModel = viewModel()
     val uiState by viewModel.uiState
 
     Column(
@@ -40,6 +40,7 @@ fun LoginView(
             label = { Text("Email") },
             modifier = Modifier.padding(8.dp),
             onValueChange = {
+                // Atualiza o email no ViewModel quando o utilizador escreve
                 viewModel.updateEmail(it)
             })
 
@@ -49,6 +50,7 @@ fun LoginView(
             modifier = Modifier.padding(8.dp),
             visualTransformation = PasswordVisualTransformation(),
             onValueChange = {
+                // Atualiza a password no ViewModel quando o utilizador escreve
                 viewModel.updatePassword(it)
             })
 
@@ -65,31 +67,29 @@ fun LoginView(
             Button(
                 modifier = Modifier.padding(8.dp),
                 onClick = {
-                    viewModel.login(){
-                        navController.navigate("home")
+                    viewModel.register() {
+                        navController.navigate("login")
                     }
-                }){
-                Text("Login")
+                }) {
+                Text("Register")
             }
             Button(
                 modifier = Modifier.padding(8.dp),
-                onClick = { navController.navigate("register") }){
-                Text("Register")
+                onClick = { navController.navigate("login") }) {
+                Text("Login page")
             }
         }
+
         if (uiState.isLoading) {
             CircularProgressIndicator()
         }
     }
-
 }
 
 @Preview(showBackground = true)
 @Composable
-fun LoginViewPreview() {
+fun RegisterViewPreview() {
     StudyLinkTheme {
-        LoginView(
-
-        )
+        RegisterView()
     }
 }
