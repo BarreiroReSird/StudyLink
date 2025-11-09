@@ -25,7 +25,6 @@ fun DashboardScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Botao para perfil
         Button(
             modifier = Modifier.padding(8.dp),
             onClick = { navController.navigate("profile") }
@@ -33,15 +32,13 @@ fun DashboardScreen(
             Text("Perfil")
         }
 
-        // Botao para anotacoes
         Button(
             modifier = Modifier.padding(8.dp),
             onClick = { navController.navigate("notes") }
         ) {
-            Text("Anotacoes")
+            Text("Notas")
         }
 
-        // Botao para logout
         Button(
             modifier = Modifier.padding(8.dp),
             onClick = {
@@ -53,7 +50,7 @@ fun DashboardScreen(
                 }
             }
         ) {
-            Text("Logout")
+            Text("Terminar Sessão")
         }
     }
 }

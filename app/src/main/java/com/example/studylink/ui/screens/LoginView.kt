@@ -42,7 +42,7 @@ fun LoginView(
             style = MaterialTheme.typography.headlineMedium
         )
         Text(
-            text = "Made by Barreiro_ReSird"
+            text = "Feito por Barreiro_ReSird"
         )
         TextField(
             value = uiState.email ?: "",
@@ -54,7 +54,7 @@ fun LoginView(
 
         TextField(
             value = uiState.password ?: "",
-            label = { Text("Password") },
+            label = { Text("Palavra-passe") },
             modifier = Modifier.padding(8.dp),
             visualTransformation = PasswordVisualTransformation(),
             onValueChange = {
@@ -64,7 +64,7 @@ fun LoginView(
         if (uiState.error != null) {
             Text(
                 text = uiState.error!!,
-                textAlign = TextAlign.Center, // Centra o texto
+                textAlign = TextAlign.Center,
                 modifier = Modifier.padding(8.dp),
             )
         }
@@ -79,12 +79,12 @@ fun LoginView(
                         navController.navigate("home")
                     }
                 }) {
-                Text("Login")
+                Text("Entrar")
             }
             Button(
                 modifier = Modifier.padding(8.dp),
                 onClick = { navController.navigate("register") }) {
-                Text("Register page")
+                Text("Registar")
             }
         }
         if (uiState.isLoading) {

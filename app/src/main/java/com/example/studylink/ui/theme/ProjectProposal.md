@@ -17,13 +17,13 @@ A arquitetura segue o padrão MVVM (Model–View–ViewModel), separando a lógi
 
 ### 3. Perfil de Utilizador
 - Página de perfil onde o utilizador pode:
-  - Criar ou editar o nome e o username (campos obrigatórios)
-  - Ver informações como:
+  - 3.1: Criar (caso seja a primeira vez) ou editar o nome e o username (campos obrigatórios)
+  - 3.2: Ver informações como:
     - Número e lista de itens criados
     - Data de criação da conta
 
 ### 4. Gestão de Itens (Notas)
-Disponível após criação do perfil.
+Disponível apenas após criação do perfil.
 
 Cada item contém:
 - Título

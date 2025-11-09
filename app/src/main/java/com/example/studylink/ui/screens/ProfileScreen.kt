@@ -7,54 +7,56 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.studylink.ui.theme.StudyLinkTheme
 
 @Composable
-fun RegisterView(
-    navController: NavController = rememberNavController(),
+fun ProfileScreen(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val viewModel: RegisterViewModel = viewModel()
+    val viewModel: ProfileViewModel = viewModel()
     val uiState by viewModel.uiState
 
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-
     ) {
-        TextField(
-            value = uiState.email ?: "",
-            label = { Text("Email") },
-            modifier = Modifier.padding(8.dp),
-            onValueChange = {
-                viewModel.updateEmail(it)
-            })
+        Text(
+            text = "Editar Perfil",
+            style = MaterialTheme.typography.headlineMedium
+        )
 
         TextField(
-            value = uiState.password ?: "",
-            label = { Text("Palavra-passe") },
-            modifier = Modifier.padding(8.dp),
-            visualTransformation = PasswordVisualTransformation(),
-            onValueChange = {
-                viewModel.updatePassword(it)
-            })
+            value = uiState.name,
+            onValueChange = { viewModel.updateName(it) },
+            label = { Text("Nome") },
+            modifier = Modifier.padding(8.dp)
+        )
+
+        TextField(
+            value = uiState.username,
+            onValueChange = { viewModel.updateUsername(it) },
+            label = { Text("Username") },
+            modifier = Modifier.padding(8.dp)
+        )
 
         if (uiState.error != null) {
             Text(
                 text = uiState.error!!,
+                textAlign = TextAlign.Center,
                 modifier = Modifier.padding(8.dp),
             )
         }
@@ -64,30 +66,20 @@ fun RegisterView(
         ) {
             Button(
                 modifier = Modifier.padding(8.dp),
-                onClick = {
-                    viewModel.register() {
-                        navController.navigate("login")
-                    }
-                }) {
-                Text("Registar")
+                onClick = { viewModel.saveProfile { navController.popBackStack() } }
+            ) {
+                Text("Guardar")
             }
+
             Button(
                 modifier = Modifier.padding(8.dp),
-                onClick = { navController.navigate("login") }) {
-                Text("Entrar")
+                onClick = { navController.popBackStack() }
+            ) {
+                Text("Voltar")
             }
         }
-
         if (uiState.isLoading) {
             CircularProgressIndicator()
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun RegisterViewPreview() {
-    StudyLinkTheme {
-        RegisterView()
     }
 }

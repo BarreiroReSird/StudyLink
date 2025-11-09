@@ -19,18 +19,16 @@ class LoginViewModel : ViewModel() {
     }
 
     fun login(onLoginSuccess: () -> Unit) {
-        // Obtem o email e a password do estado
         val email = _uiState.value.email
         val password = _uiState.value.password
 
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            _uiState.value = _uiState.value.copy(error = "Email and/or password cannot be left blank.")
+            _uiState.value = _uiState.value.copy(error = "O Email e/ou a palavra-passe não podem estar vazios.")
             return
         }
 
         _uiState.value = _uiState.value.copy(isLoading = true, error = null)
 
-        // Inicia a sessao com o email e a password no Firebase
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 _uiState.value = _uiState.value.copy(isLoading = false)
@@ -38,7 +36,7 @@ class LoginViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     onLoginSuccess()
                 } else {
-                    _uiState.value = _uiState.value.copy(error = task.exception?.message ?: "An error occurred during login.")
+                    _uiState.value = _uiState.value.copy(error = task.exception?.message ?: "Ocorreu um erro durante o início de sessão.")
                 }
             }
     }

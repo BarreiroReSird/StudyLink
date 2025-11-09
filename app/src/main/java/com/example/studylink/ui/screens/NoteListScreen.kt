@@ -6,20 +6,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 
 @Composable
-fun NoteListScreen(modifier: Modifier = Modifier) {
+fun NoteListScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Ecrã da Lista de Notas - Em desenvolvimento")
+        Text("Brevemente")
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun NoteListScreenPreview() {
-    NoteListScreen()
 }

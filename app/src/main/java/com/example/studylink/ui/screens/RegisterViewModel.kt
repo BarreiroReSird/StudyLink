@@ -21,12 +21,11 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun register(onRegisterSuccess: () -> Unit) {
-        // Obtem o email e a password do estado
         val email = _uiState.value.email
         val password = _uiState.value.password
 
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            _uiState.value = _uiState.value.copy(error = "Email and password cannot be empty.")
+            _uiState.value = _uiState.value.copy(error = "O Email e a palavra-passe não podem estar vazios.")
             return
         }
 
@@ -38,13 +37,13 @@ class RegisterViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     onRegisterSuccess()
                 } else {
+                    // Mantém a mensagem de erro do Firebase (geralmente em inglês)
                     _uiState.value = _uiState.value.copy(error = task.exception?.message)
                 }
             }
     }
 }
 
-// Classe de dados para representar o estado do ecra de registo
 data class RegisterUIState(
     val email: String? = null,
     val password: String? = null,
