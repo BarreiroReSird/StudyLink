@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,10 +25,10 @@ import com.example.studylink.ui.theme.StudyLinkTheme
 
 @Composable
 fun LoginView(
-    navController : NavController = rememberNavController(),
+    navController: NavController = rememberNavController(),
     modifier: Modifier = Modifier
-){
-    val viewModel : LoginViewModel = viewModel()
+) {
+    val viewModel: LoginViewModel = viewModel()
     val uiState by viewModel.uiState
 
     Column(
@@ -35,6 +37,13 @@ fun LoginView(
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
+        Text(
+            text = "StudyLink",
+            style = MaterialTheme.typography.headlineMedium
+        )
+        Text(
+            text = "Made by Barreiro_ReSird"
+        )
         TextField(
             value = uiState.email ?: "",
             label = { Text("Email") },
@@ -55,6 +64,7 @@ fun LoginView(
         if (uiState.error != null) {
             Text(
                 text = uiState.error!!,
+                textAlign = TextAlign.Center, // Centra o texto
                 modifier = Modifier.padding(8.dp),
             )
         }
@@ -65,16 +75,16 @@ fun LoginView(
             Button(
                 modifier = Modifier.padding(8.dp),
                 onClick = {
-                    viewModel.login(){
+                    viewModel.login() {
                         navController.navigate("home")
                     }
-                }){
+                }) {
                 Text("Login")
             }
             Button(
                 modifier = Modifier.padding(8.dp),
-                onClick = { navController.navigate("register") }){
-                Text("Register")
+                onClick = { navController.navigate("register") }) {
+                Text("Register page")
             }
         }
         if (uiState.isLoading) {
