@@ -1,0 +1,6 @@
+toml
+# In gradle/libs.versions.toml
+
+[libraries]
+#...
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }

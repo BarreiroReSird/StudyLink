@@ -4,6 +4,7 @@ Proposta de Projeto: StudyLink
   - Usar o padrão MVVM (Model-View-ViewModel), que separa a lógica de apresentação (Views) da lógica de dados (ViewModels);
 
 Objetivos: (Requisitos obrigatorios)
+- Ligação com o Firebase;
 - Login;
 - Registo;
 - Perfil de Utilizador;

@@ -1,0 +1,10 @@
+toml
+# In gradle/libs.versions.toml
+
+[versions]
+#...
+firebaseCommonKtx = "21.0.0" // Use a known stable version
+
+[libraries]
+#...
+firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common", version.ref = "firebaseCommonKtx" } // Remove '-ktx' from the name
