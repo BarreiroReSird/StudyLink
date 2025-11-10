@@ -6,10 +6,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.studylink.ui.profile.CreateNoteScreen
+import com.example.studylink.ui.profile.NoteDetailScreen
+import com.example.studylink.ui.profile.SeeNoteScreen
 import com.example.studylink.ui.screens.DashboardScreen
 import com.example.studylink.ui.screens.LoginView
 import com.example.studylink.ui.screens.NoteMenuScreen
@@ -71,6 +75,18 @@ fun StudyLinkApp() {
                 onNoteCreated = { navController.popBackStack() },
                 onCancel = { navController.popBackStack() }
             )
+        }
+        composable("see_note") {
+            SeeNoteScreen(navController = navController)
+        }
+        composable(
+            "note_detail/{noteId}",
+            arguments = listOf(navArgument("noteId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val noteId = backStackEntry.arguments?.getString("noteId")
+            if (noteId != null) {
+                NoteDetailScreen(navController = navController, noteId = noteId)
+            }
         }
     }
 }

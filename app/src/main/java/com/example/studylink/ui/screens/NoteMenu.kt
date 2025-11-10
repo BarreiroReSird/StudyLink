@@ -32,7 +32,7 @@ fun NoteMenuScreen(
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             modifier = Modifier.padding(8.dp),
-            onClick = { /* TODO: Navigate to view notes */ })
+            onClick = { navController.navigate("see_note") })
         {
             Text("Ver Notas")
         }
