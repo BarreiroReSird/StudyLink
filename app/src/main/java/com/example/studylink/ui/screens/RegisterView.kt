@@ -3,10 +3,13 @@ package com.example.studylink.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -35,6 +38,19 @@ fun RegisterView(
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
+        Text(
+            text = "StudyLink",
+            style = MaterialTheme.typography.headlineLarge
+        )
+        Text(
+            text = "Feito por Barreiro_ReSird"
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Registo",
+            style = MaterialTheme.typography.headlineMedium
+        )
+        Spacer(modifier = Modifier.height(16.dp))
         TextField(
             value = uiState.email ?: "",
             label = { Text("Email") },
@@ -69,12 +85,12 @@ fun RegisterView(
                         navController.navigate("login")
                     }
                 }) {
-                Text("Registar")
+                Text("Efetuar registo")
             }
             Button(
                 modifier = Modifier.padding(8.dp),
                 onClick = { navController.navigate("login") }) {
-                Text("Entrar")
+                Text("Aba login")
             }
         }
 

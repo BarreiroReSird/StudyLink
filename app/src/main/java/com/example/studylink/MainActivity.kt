@@ -9,10 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.studylink.ui.profile.CreateNoteScreen
 import com.example.studylink.ui.screens.DashboardScreen
 import com.example.studylink.ui.screens.LoginView
-import com.example.studylink.ui.screens.NoteListScreen
-import com.example.studylink.ui.screens.ProfileScreen
+import com.example.studylink.ui.screens.NoteMenuScreen
+import com.example.studylink.ui.profile.ProfileScreen
 import com.example.studylink.ui.screens.RegisterView
 import com.example.studylink.ui.theme.StudyLinkTheme
 import com.google.firebase.FirebaseApp
@@ -63,7 +64,13 @@ fun StudyLinkApp() {
             ProfileScreen(navController = navController)
         }
         composable("notes") {
-            NoteListScreen(navController = navController)
+            NoteMenuScreen(navController = navController)
+        }
+        composable("create_note") {
+            CreateNoteScreen(
+                onNoteCreated = { navController.popBackStack() },
+                onCancel = { navController.popBackStack() }
+            )
         }
     }
 }

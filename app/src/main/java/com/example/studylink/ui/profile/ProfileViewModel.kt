@@ -8,10 +8,13 @@ import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import com.google.firebase.Timestamp
 
 data class UserProfile(
     val name: String = "",
-    val username: String = ""
+    val username: String = "",
+    val createdAt: Timestamp? = null,
+    val createdItems: List<String> = emptyList()
 )
 
 class ProfileViewModel : ViewModel() {
@@ -22,10 +25,15 @@ class ProfileViewModel : ViewModel() {
     private val _userProfile = MutableStateFlow<UserProfile?>(null)
     val userProfile: StateFlow<UserProfile?> = _userProfile.asStateFlow()
 
+    private val _createdItems = MutableStateFlow<List<String>>(emptyList())
+    val createdItems: StateFlow<List<String>> = _createdItems.asStateFlow()
+
     private var profileListener: ListenerRegistration? = null
+    private var itemsListener: ListenerRegistration? = null
 
     init {
         loadProfile()
+        loadCreatedItems()
     }
 
     private fun loadProfile() {
@@ -38,9 +46,26 @@ class ProfileViewModel : ViewModel() {
                 }
 
                 if (document != null && document.exists()) {
-                    _userProfile.value = document.toObject(UserProfile::class.java)
+                    val profile = document.toObject(UserProfile::class.java)
+                    _userProfile.value = profile
                 } else {
                     _userProfile.value = null
+                }
+            }
+    }
+
+    private fun loadCreatedItems() {
+        val userId = auth.currentUser?.uid ?: return
+        itemsListener?.remove()
+        itemsListener = db.collection("notes").whereEqualTo("userId", userId)
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+
+                if (querySnapshot != null) {
+                    val items = querySnapshot.documents.mapNotNull { it.getString("title") }
+                    _createdItems.value = items
                 }
             }
     }
@@ -72,5 +97,6 @@ class ProfileViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         profileListener?.remove()
+        itemsListener?.remove()
     }
 }

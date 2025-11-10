@@ -3,7 +3,9 @@ package com.example.studylink.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -39,11 +41,17 @@ fun LoginView(
     ) {
         Text(
             text = "StudyLink",
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineLarge
         )
         Text(
             text = "Feito por Barreiro_ReSird"
         )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Login",
+            style = MaterialTheme.typography.headlineMedium
+        )
+        Spacer(modifier = Modifier.height(16.dp))
         TextField(
             value = uiState.email ?: "",
             label = { Text("Email") },
@@ -79,12 +87,12 @@ fun LoginView(
                         navController.navigate("home")
                     }
                 }) {
-                Text("Entrar")
+                Text("Efetuar login")
             }
             Button(
                 modifier = Modifier.padding(8.dp),
                 onClick = { navController.navigate("register") }) {
-                Text("Registar")
+                Text("Aba registo")
             }
         }
         if (uiState.isLoading) {
