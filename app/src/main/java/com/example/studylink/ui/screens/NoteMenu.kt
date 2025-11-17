@@ -44,7 +44,7 @@ fun NoteMenuScreen(
         }
         Button(
             modifier = Modifier.padding(8.dp),
-            onClick = { /* TODO: Navigate to edit note */ })
+            onClick = { navController.navigate("my_notes") })
         {
             Text("Editar Nota")
         }

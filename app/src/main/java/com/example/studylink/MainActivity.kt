@@ -12,6 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.studylink.ui.profile.CreateNoteScreen
+import com.example.studylink.ui.profile.EditNoteScreen
+import com.example.studylink.ui.profile.MyNotesScreen
 import com.example.studylink.ui.profile.NoteDetailScreen
 import com.example.studylink.ui.profile.SeeNoteScreen
 import com.example.studylink.ui.screens.DashboardScreen
@@ -79,6 +81,9 @@ fun StudyLinkApp() {
         composable("see_note") {
             SeeNoteScreen(navController = navController)
         }
+        composable("my_notes") {
+            MyNotesScreen(navController = navController)
+        }
         composable(
             "note_detail/{noteId}",
             arguments = listOf(navArgument("noteId") { type = NavType.StringType })
@@ -86,6 +91,19 @@ fun StudyLinkApp() {
             val noteId = backStackEntry.arguments?.getString("noteId")
             if (noteId != null) {
                 NoteDetailScreen(navController = navController, noteId = noteId)
+            }
+        }
+        composable(
+            "edit_note/{noteId}",
+            arguments = listOf(navArgument("noteId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val noteId = backStackEntry.arguments?.getString("noteId")
+            if (noteId != null) {
+                EditNoteScreen(
+                    noteId = noteId,
+                    onNoteUpdated = { navController.popBackStack() },
+                    onCancel = { navController.popBackStack() }
+                )
             }
         }
     }

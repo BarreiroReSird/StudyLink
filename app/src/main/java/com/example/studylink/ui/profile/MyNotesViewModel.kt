@@ -1,28 +1,18 @@
 package com.example.studylink.ui.profile
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import com.google.firebase.Timestamp
 
-data class Note(
-    val id: String = "",
-    val title: String = "",
-    val content: String = "",
-    val userId: String = "",
-    val authorUsername: String = "",
-    val isPrivate: Boolean = false,
-    val timestamp: Long = 0,
-    val createdAt: Timestamp? = null
-)
-
-class SeeNoteViewModel : ViewModel() {
+class MyNotesViewModel : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     private val _notes = MutableStateFlow<List<Note>>(emptyList())
     val notes: StateFlow<List<Note>> = _notes.asStateFlow()
@@ -34,12 +24,15 @@ class SeeNoteViewModel : ViewModel() {
     }
 
     private fun loadNotes() {
+        val userId = auth.currentUser?.uid
+        if (userId == null) return
+
         notesListener?.remove()
         notesListener = db.collection("notes")
+            .whereEqualTo("userId", userId)
             .orderBy("createdAt", Query.Direction.DESCENDING)
             .addSnapshotListener { querySnapshot, error ->
                 if (error != null) {
-                    // Handle error, maybe expose it to the UI
                     return@addSnapshotListener
                 }
 

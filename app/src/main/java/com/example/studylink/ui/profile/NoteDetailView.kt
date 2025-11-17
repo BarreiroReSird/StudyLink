@@ -1,6 +1,7 @@
 package com.example.studylink.ui.profile
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -30,14 +32,17 @@ fun NoteDetailScreen(
     }
 
     val note by viewModel.note.collectAsState()
+    val currentUser = FirebaseAuth.getInstance().currentUser
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Button(onClick = { navController.popBackStack() }) {
-            Text("Voltar")
+        Row {
+            Button(onClick = { navController.popBackStack() }) {
+                Text("Voltar")
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -47,14 +52,15 @@ fun NoteDetailScreen(
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Autor: ${it.authorUsername}", style = MaterialTheme.typography.bodySmall)
             Spacer(modifier = Modifier.height(4.dp))
-            it.createdAt?.toDate()?.let {
+            it.createdAt?.toDate()?.let { date ->
                 Text(
-                    text = "Criado em: ${SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(it)}",
+                    text = "Criado em: ${SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(date)}",
                     style = MaterialTheme.typography.bodySmall
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = it.content, style = MaterialTheme.typography.bodyMedium)
+
         } ?: run {
             Text("Nota não encontrada ou a carregar...")
         }
