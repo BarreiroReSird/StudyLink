@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun SeeNoteScreen(
+fun SeeNoteView(
     navController: NavController,
     viewModel: SeeNoteViewModel = viewModel()
 ) {

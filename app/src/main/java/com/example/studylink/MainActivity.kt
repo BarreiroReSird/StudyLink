@@ -16,7 +16,7 @@ import com.example.studylink.ui.profile.DeleteConfirmationView
 import com.example.studylink.ui.profile.EditNoteView
 import com.example.studylink.ui.profile.MyNotesView
 import com.example.studylink.ui.profile.NoteDetailView
-import com.example.studylink.ui.profile.SeeNoteScreen
+import com.example.studylink.ui.profile.SeeNoteView
 import com.example.studylink.ui.profile.DeleteNotesView
 import com.example.studylink.ui.screens.DashboardView
 import com.example.studylink.ui.screens.LoginView
@@ -75,7 +75,7 @@ fun StudyLinkApp() {
             NoteMenuView(navController = navController)
         }
         composable("see_note") {
-            SeeNoteScreen(navController = navController)
+            SeeNoteView(navController = navController)
         }
         composable("delete_note") {
             DeleteNotesView(navController = navController)
