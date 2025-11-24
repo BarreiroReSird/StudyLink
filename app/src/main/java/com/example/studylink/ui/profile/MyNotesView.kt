@@ -64,6 +64,66 @@ fun MyNotesView(
 }
 
 @Composable
+fun DeleteNotesView(
+    navController: NavController,
+    viewModel: MyNotesViewModel = viewModel()
+) {
+    val notes by viewModel.notes.collectAsState()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Eliminar Notas",
+            style = MaterialTheme.typography.headlineMedium
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = { navController.popBackStack() }) {
+            Text("Voltar")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        if (notes.isEmpty()) {
+            Text("Ainda não criou nenhuma nota.")
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(notes) { note ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { navController.navigate("delete_confirmation/${note.id}") }
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp)
+                        ) {
+                            Text(
+                                text = note.title,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            note.createdAt?.toDate()?.let {
+                                Text(
+                                    text = "Criado em: ${SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(it)}",
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            }
+        }
+    }
+}
+
+@Composable
 fun MyNoteItem(note: Note, navController: NavController) {
     Card(
         modifier = Modifier
