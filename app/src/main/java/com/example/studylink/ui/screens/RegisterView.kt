@@ -24,6 +24,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.studylink.ui.theme.StudyLinkTheme
 
+// To do:
+// Double password verification;
 @Composable
 fun RegisterView(
     navController: NavController = rememberNavController(),

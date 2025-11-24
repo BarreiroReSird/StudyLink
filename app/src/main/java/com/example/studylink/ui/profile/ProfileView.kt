@@ -26,7 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 
 @Composable
-fun ProfileScreen(navController: NavController, profileViewModel: ProfileViewModel = viewModel()) {
+fun ProfileView(navController: NavController, profileViewModel: ProfileViewModel = viewModel()) {
     val userProfile by profileViewModel.userProfile.collectAsState()
     var isEditing by remember { mutableStateOf(false) }
 
@@ -49,7 +49,7 @@ fun ProfileScreen(navController: NavController, profileViewModel: ProfileViewMod
                     onCancel = { isEditing = false }
                 )
             } else {
-                ProfileDisplayScreen(
+                ProfileDisplayView(
                     userProfile = profile,
                     onEditClick = { isEditing = true },
                     onBackClick = { navController.popBackStack() }
@@ -60,7 +60,7 @@ fun ProfileScreen(navController: NavController, profileViewModel: ProfileViewMod
 }
 
 @Composable
-fun ProfileDisplayScreen(userProfile: UserProfile, onEditClick: () -> Unit, onBackClick: () -> Unit) {
+fun ProfileDisplayView(userProfile: UserProfile, onEditClick: () -> Unit, onBackClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()

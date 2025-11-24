@@ -11,15 +11,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.studylink.ui.profile.CreateNoteScreen
-import com.example.studylink.ui.profile.EditNoteScreen
-import com.example.studylink.ui.profile.MyNotesScreen
-import com.example.studylink.ui.profile.NoteDetailScreen
-import com.example.studylink.ui.profile.SeeNoteScreen
-import com.example.studylink.ui.screens.DashboardScreen
+import com.example.studylink.ui.profile.CreateNoteView
+import com.example.studylink.ui.profile.DeleteConfirmationView
+import com.example.studylink.ui.profile.EditNoteView
+import com.example.studylink.ui.profile.MyNotesView
+import com.example.studylink.ui.profile.NoteDetailView
+import com.example.studylink.ui.screens.DashboardView
 import com.example.studylink.ui.screens.LoginView
-import com.example.studylink.ui.screens.NoteMenuScreen
-import com.example.studylink.ui.profile.ProfileScreen
+import com.example.studylink.ui.screens.NoteMenuView
+import com.example.studylink.ui.profile.ProfileView
 import com.example.studylink.ui.screens.RegisterView
 import com.example.studylink.ui.theme.StudyLinkTheme
 import com.google.firebase.FirebaseApp
@@ -64,25 +64,22 @@ fun StudyLinkApp() {
             RegisterView(navController = navController)
         }
         composable("home") {
-            DashboardScreen(navController = navController)
+            DashboardView(navController = navController)
         }
         composable("profile") {
-            ProfileScreen(navController = navController)
+            ProfileView(navController = navController)
         }
         composable("notes") {
-            NoteMenuScreen(navController = navController)
+            NoteMenuView(navController = navController)
         }
         composable("create_note") {
-            CreateNoteScreen(
+            CreateNoteView(
                 onNoteCreated = { navController.popBackStack() },
                 onCancel = { navController.popBackStack() }
             )
         }
-        composable("see_note") {
-            SeeNoteScreen(navController = navController)
-        }
         composable("my_notes") {
-            MyNotesScreen(navController = navController)
+            MyNotesView(navController = navController)
         }
         composable(
             "note_detail/{noteId}",
@@ -90,7 +87,7 @@ fun StudyLinkApp() {
         ) { backStackEntry ->
             val noteId = backStackEntry.arguments?.getString("noteId")
             if (noteId != null) {
-                NoteDetailScreen(navController = navController, noteId = noteId)
+                NoteDetailView(navController = navController, noteId = noteId)
             }
         }
         composable(
@@ -99,11 +96,20 @@ fun StudyLinkApp() {
         ) { backStackEntry ->
             val noteId = backStackEntry.arguments?.getString("noteId")
             if (noteId != null) {
-                EditNoteScreen(
+                EditNoteView(
                     noteId = noteId,
                     onNoteUpdated = { navController.popBackStack() },
                     onCancel = { navController.popBackStack() }
                 )
+            }
+        }
+        composable(
+            "delete_confirmation/{noteId}",
+            arguments = listOf(navArgument("noteId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val noteId = backStackEntry.arguments?.getString("noteId")
+            if (noteId != null) {
+                DeleteConfirmationView(navController = navController, noteId = noteId)
             }
         }
     }

@@ -17,22 +17,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun NoteDetailView(
+fun DeleteConfirmationView(
     navController: NavController,
     noteId: String,
-    viewModel: NoteDetailViewModel = viewModel()
+    viewModel: DeleteConfirmationViewModel = viewModel()
 ) {
     LaunchedEffect(noteId) {
         viewModel.loadNote(noteId)
     }
 
     val note = viewModel.note.collectAsState().value
-    val currentUser = FirebaseAuth.getInstance().currentUser
 
     Column(
         modifier = Modifier
@@ -60,6 +58,14 @@ fun NoteDetailView(
             }
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = it.content, style = MaterialTheme.typography.bodyMedium)
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = {
+                viewModel.deleteNote(noteId) {
+                    navController.popBackStack("notes", inclusive = false)
+                }
+            }) {
+                Text("Eliminar")
+            }
 
         } ?: run {
             Text("Nota não encontrada ou a carregar...")

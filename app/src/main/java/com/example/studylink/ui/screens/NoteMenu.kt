@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun NoteMenuScreen(
+fun NoteMenuView(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -50,7 +50,7 @@ fun NoteMenuScreen(
         }
         Button(
             modifier = Modifier.padding(8.dp),
-            onClick = { /* TODO: Navigate to delete note */ })
+            onClick = { navController.navigate("delete_note") })
         {
             Text("Eliminar Nota")
         }

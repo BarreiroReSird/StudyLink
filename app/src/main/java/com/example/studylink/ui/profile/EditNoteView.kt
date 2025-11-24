@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun EditNoteScreen(
+fun EditNoteView(
     noteId: String,
     onNoteUpdated: () -> Unit,
     onCancel: () -> Unit,

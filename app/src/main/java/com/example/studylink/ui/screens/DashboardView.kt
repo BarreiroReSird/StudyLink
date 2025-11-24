@@ -23,7 +23,7 @@ import androidx.navigation.NavController
 import com.example.studylink.ui.profile.ProfileViewModel
 
 @Composable
-fun DashboardScreen(
+fun DashboardView(
     navController: NavController,
     modifier: Modifier = Modifier,
     profileViewModel: ProfileViewModel = viewModel()
