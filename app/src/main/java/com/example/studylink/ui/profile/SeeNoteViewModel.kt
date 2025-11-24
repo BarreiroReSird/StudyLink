@@ -7,18 +7,7 @@ import com.google.firebase.firestore.Query
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import com.google.firebase.Timestamp
-
-data class Note(
-    val id: String = "",
-    val title: String = "",
-    val content: String = "",
-    val userId: String = "",
-    val authorUsername: String = "",
-    val isPrivate: Boolean = false,
-    val timestamp: Long = 0,
-    val createdAt: Timestamp? = null
-)
+import com.example.studylink.ui.theme.Note
 
 class SeeNoteViewModel : ViewModel() {
 

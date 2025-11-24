@@ -1,5 +1,6 @@
 package com.example.studylink.ui.profile
 
+import com.example.studylink.ui.theme.Note
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.MutableStateFlow

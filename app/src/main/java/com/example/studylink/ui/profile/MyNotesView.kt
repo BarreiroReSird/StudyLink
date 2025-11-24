@@ -1,5 +1,6 @@
 package com.example.studylink.ui.profile
 
+import com.example.studylink.ui.theme.Note
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -124,7 +125,7 @@ fun DeleteNotesView(
 }
 
 @Composable
-fun MyNoteItem(note: Note, navController: NavController) {
+fun MyNoteItem(note: com.example.studylink.ui.theme.Note, navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
