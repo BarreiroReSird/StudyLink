@@ -24,8 +24,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.studylink.ui.theme.StudyLinkTheme
 
-// To do:
-// Double password verification;
 @Composable
 fun RegisterView(
     navController: NavController = rememberNavController(),
@@ -70,9 +68,19 @@ fun RegisterView(
                 viewModel.updatePassword(it)
             })
 
+        TextField(
+            value = uiState.confirmPassword ?: "",
+            label = { Text("Confirmar palavra-passe") },
+            modifier = Modifier.padding(8.dp),
+            visualTransformation = PasswordVisualTransformation(),
+            onValueChange = {
+                viewModel.updateConfirmPassword(it)
+            })
+
         if (uiState.error != null) {
             Text(
                 text = uiState.error!!,
+                color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(8.dp),
             )
         }

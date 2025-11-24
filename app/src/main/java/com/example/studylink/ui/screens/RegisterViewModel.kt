@@ -20,12 +20,27 @@ class RegisterViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(password = password)
     }
 
+    fun updateConfirmPassword(confirmPassword: String) {
+        _uiState.value = _uiState.value.copy(confirmPassword = confirmPassword)
+    }
+
     fun register(onRegisterSuccess: () -> Unit) {
         val email = _uiState.value.email
         val password = _uiState.value.password
+        val confirmPassword = _uiState.value.confirmPassword
 
-        if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            _uiState.value = _uiState.value.copy(error = "O Email e a palavra-passe não podem estar vazios.")
+        if (email.isNullOrEmpty() || password.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
+            _uiState.value = _uiState.value.copy(error = "Todos os campos são obrigatórios.")
+            return
+        }
+
+        if (password != confirmPassword) {
+            _uiState.value = _uiState.value.copy(error = "As palavras-passe não coincidem.")
+            return
+        }
+
+        if (password.length < 6) {
+            _uiState.value = _uiState.value.copy(error = "A palavra-passe deve ter pelo menos 6 caracteres.")
             return
         }
 
@@ -47,6 +62,7 @@ class RegisterViewModel : ViewModel() {
 data class RegisterUIState(
     val email: String? = null,
     val password: String? = null,
+    val confirmPassword: String? = null,
     val error: String? = null,
     val isLoading: Boolean = false
 )
