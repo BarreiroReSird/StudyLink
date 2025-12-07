@@ -2,12 +2,14 @@ package com.example.studylink.ui.profile
 
 import com.example.studylink.ui.theme.Note
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -17,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -34,7 +37,9 @@ fun MyNotesView(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = "Minhas Notas",
@@ -43,23 +48,26 @@ fun MyNotesView(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { navController.popBackStack() }) {
-            Text("Voltar")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
         if (notes.isEmpty()) {
             Text("Ainda não criou nenhuma nota.")
         } else {
             LazyColumn(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.weight(1f)
             ) {
                 items(notes) { note ->
                     MyNoteItem(note = note, navController = navController)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = { navController.popBackStack() },
+            modifier = Modifier.width(200.dp)
+        ) {
+            Text("Voltar")
         }
     }
 }
@@ -74,7 +82,9 @@ fun DeleteNotesView(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = "Eliminar Notas",
@@ -83,17 +93,11 @@ fun DeleteNotesView(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { navController.popBackStack() }) {
-            Text("Voltar")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
         if (notes.isEmpty()) {
             Text("Ainda não criou nenhuma nota.")
         } else {
             LazyColumn(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.weight(1f)
             ) {
                 items(notes) { note ->
                     Card(
@@ -120,6 +124,15 @@ fun DeleteNotesView(
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = { navController.popBackStack() },
+            modifier = Modifier.width(200.dp)
+        ) {
+            Text("Voltar")
         }
     }
 }

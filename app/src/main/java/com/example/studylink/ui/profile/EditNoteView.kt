@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -23,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.studylink.ui.theme.Note
 
 @Composable
 fun EditNoteView(
@@ -62,7 +60,7 @@ fun EditNoteView(
             value = title,
             onValueChange = { title = it },
             label = { Text("Título") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.width(280.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -72,21 +70,21 @@ fun EditNoteView(
             onValueChange = { content = it },
             label = { Text("Conteúdo") },
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
+                .width(280.dp)
+                .height(150.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Button(onClick = onCancel) {
+            Button(
+                onClick = onCancel,
+                modifier = Modifier.width(140.dp)
+            ) {
                 Text("Cancelar")
             }
-
-            Spacer(modifier = Modifier.width(16.dp))
 
             Button(
                 onClick = {
@@ -95,7 +93,8 @@ fun EditNoteView(
                         onError = { /* Handle error */ }
                     )
                 },
-                enabled = title.isNotBlank() && content.isNotBlank()
+                enabled = title.isNotBlank() && content.isNotBlank(),
+                modifier = Modifier.width(140.dp)
             ) {
                 Text("Guardar")
             }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -42,9 +43,6 @@ fun RegisterView(
             text = "StudyLink",
             style = MaterialTheme.typography.headlineLarge
         )
-        Text(
-            text = "Feito por Barreiro_ReSird"
-        )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Registo",
@@ -54,7 +52,7 @@ fun RegisterView(
         TextField(
             value = uiState.email ?: "",
             label = { Text("Email") },
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).width(280.dp),
             onValueChange = {
                 viewModel.updateEmail(it)
             })
@@ -62,7 +60,7 @@ fun RegisterView(
         TextField(
             value = uiState.password ?: "",
             label = { Text("Palavra-passe") },
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).width(280.dp),
             visualTransformation = PasswordVisualTransformation(),
             onValueChange = {
                 viewModel.updatePassword(it)
@@ -71,7 +69,7 @@ fun RegisterView(
         TextField(
             value = uiState.confirmPassword ?: "",
             label = { Text("Confirmar palavra-passe") },
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).width(280.dp),
             visualTransformation = PasswordVisualTransformation(),
             onValueChange = {
                 viewModel.updateConfirmPassword(it)
@@ -86,10 +84,11 @@ fun RegisterView(
         }
 
         Row(
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Button(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.width(140.dp),
                 onClick = {
                     viewModel.register() {
                         navController.navigate("login")
@@ -98,7 +97,7 @@ fun RegisterView(
                 Text("Efetuar registo")
             }
             Button(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.width(140.dp),
                 onClick = { navController.navigate("login") }) {
                 Text("Aba login")
             }

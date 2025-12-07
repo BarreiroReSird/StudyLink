@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -44,14 +45,18 @@ fun DashboardView(
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .width(200.dp),
             onClick = { navController.navigate("profile") }
         ) {
             Text("Perfil")
         }
 
         Button(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .width(200.dp),
             onClick = {
                 if (userProfile != null) {
                     navController.navigate("notes")
@@ -72,7 +77,9 @@ fun DashboardView(
         }
 
         Button(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .width(200.dp),
             onClick = {
                 viewModel.logout()
                 navController.navigate("login") {

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,31 +32,31 @@ fun NoteMenuView(
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).width(200.dp),
             onClick = { navController.navigate("see_note") })
         {
             Text("Ver Notas")
         }
         Button(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).width(200.dp),
             onClick = { navController.navigate("create_note") })
         {
             Text("Criar Nota")
         }
         Button(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).width(200.dp),
             onClick = { navController.navigate("my_notes") })
         {
             Text("Editar Nota")
         }
         Button(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).width(200.dp),
             onClick = { navController.navigate("delete_note") })
         {
             Text("Eliminar Nota")
         }
         Button(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).width(200.dp),
             onClick = { navController.popBackStack() })
         {
             Text("Voltar")

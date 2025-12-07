@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -73,15 +74,16 @@ fun ProfileDisplayView(userProfile: UserProfile, onEditClick: () -> Unit, onBack
         Text(text = "Username: ${userProfile.username}", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))
         Row(
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Button(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.width(140.dp),
                 onClick = onBackClick) {
                 Text("Voltar")
             }
             Button(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.width(140.dp),
                 onClick = onEditClick) {
                 Text("Editar perfil")
             }
@@ -115,7 +117,7 @@ fun ProfileForm(
             value = name,
             onValueChange = { name = it },
             label = { Text("Nome") },
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp).width(280.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -123,15 +125,16 @@ fun ProfileForm(
             value = username,
             onValueChange = { username = it },
             label = { Text("Username") },
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp).width(280.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
 
         Row(
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Button(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.width(140.dp),
                 onClick = {
                     profileViewModel.saveProfile(name, username,
                         onSuccess = onSave,
@@ -142,7 +145,7 @@ fun ProfileForm(
             }
             onCancel?.let {
                 Button(
-                    modifier = Modifier.padding(8.dp),
+                    modifier = Modifier.width(140.dp),
                     onClick = it) {
                     Text("Cancelar")
                 }
